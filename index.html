@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 </head>
 <body>
     <div class="header">
@@ -14,12 +16,16 @@
                 <div class="navbar">
                     <a href="#" class="logo">Company</a>
                     <ul class="header_menu">
-                        <div class="search"><img src="images/search.svg" alt=""></div>
-                        <li class="header_menu_item"><a href="">Potrfolio</a></li>
-                        <li class="header_menu_item"><a href="">Team</a></li>
-                        <li class="header_menu_item"><a href="">About</a></li>
-                        <li class="header_menu_item"><a href="">Blog</a></li> 
-                        <li class="header_menu_item"><a href="">Contact</a></li>    
+                        
+                        <div class="search">
+                            <input type="text" class = "search_input" placeholder="">
+                            <div><img src="images/search.svg" class = "search_img" alt=""></div>
+                        </div>
+                        <li class="header_menu_item"><a class = "link" href="">Potrfolio</a></li>
+                        <li class="header_menu_item"><a class = "link" href="">Team</a></li>
+                        <li class="header_menu_item"><a class = "link" href="">About</a></li>
+                        <li class="header_menu_item"><a class = "link" href="">Blog</a></li> 
+                        <li class="header_menu_item"><a class = "link" href="">Contact</a></li>    
                     </ul>
                     <div class="burger" id="burger">
                         <span></span>
@@ -107,9 +113,16 @@
         </section>
         <section>
             <div class="container">
-                <div class="slider">
-                    <img src="images/slider_1.jpg" alt="image" class="slider_img">
-                </div>
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide"><img src="images/slider_1.jpg" alt="image" class="slider_img"></div>
+                      <div class="swiper-slide"><img src="images/offer_1.jpg" alt="image" class="slider_img"></div>
+                      <div class="swiper-slide"><img src="images/offer_2.jpg" alt="image" class="slider_img"></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                  </div>
             </div>
         </section>
         <section>
@@ -161,24 +174,46 @@
             </div>
         </div>
 
-
 <script>
         const hamb = document.querySelector('.burger');
+        const search = document.querySelector('.navbar .search_img');
         const popup = document.querySelector('.popup');
         const menu = document.querySelector('.header_menu').cloneNode(1);
         hamb.addEventListener('click',burgerHandler);
+        search.addEventListener('click',searchHandler);
+
+
         function burgerHandler(e){
-        e.preventDefault();
-        document.querySelector('.burger span').classList.toggle('active');
-        popup.classList.toggle('open');
-        renderPopup();
+            e.preventDefault();
+            document.querySelector('.burger span').classList.toggle('active');
+            popup.classList.toggle('open');
+            renderPopup();
+        }
+
+        function searchHandler(e){
+            e.preventDefault();
+            document.querySelector('.navbar .search input').classList.toggle('search_input_active');
         }
 
         function renderPopup(){
-        popup.appendChild(menu);
+            popup.appendChild(menu);
         }
-</script>
 
+
+        const swiper = new Swiper('.swiper', {
+        loop: true,
+        pagination: {
+        el: '.swiper-pagination',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+    });
+</script>
 
 </body>
 </html>
